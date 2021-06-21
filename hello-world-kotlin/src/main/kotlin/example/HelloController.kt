@@ -17,6 +17,8 @@ package example
 
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
+import javax.inject.Inject
+import javax.inject.Named
 
 /**
  * @author James Kleeh
@@ -27,6 +29,14 @@ class HelloController(
     private val greetingService: GreetingService
 ) {
 
+    @Inject
+    @Named("string1")
+    lateinit var string1: String
+
+    @Inject
+    @Named("string2")
+    lateinit var string2: String
+
     @Get("/hello/{name}")
-    fun hello(name: String) = greetingService.greet(name)
+    fun hello(name: String) = string1 + string2
 }
